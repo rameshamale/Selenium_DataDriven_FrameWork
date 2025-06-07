@@ -13,6 +13,8 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.time.Duration;
+import java.util.HashMap;
+import java.util.Map;
 
 public class TestUtil {
 	
@@ -55,4 +57,32 @@ public class TestUtil {
     	return new String[] {name,email};	
     }
     
+    public static String[] genrateSignUpData() {
+    	
+    	String fullName = faker.name().fullName();
+        String password = faker.internet().password(8, 15, true, true);
+        String firstName = faker.name().firstName();
+        String lastName = faker.name().lastName();
+        String company = faker.company().name();
+        String address = faker.address().streetAddress();
+        String state = faker.address().state();
+        String city = faker.address().city();
+        String mobile = faker.phoneNumber().cellPhone().replaceAll("[^0-9]", "").substring(0, 10);
+        
+        return new String[] {fullName,password,firstName,lastName,company,address,state,city,mobile};
+    }
+    
+    
+    public static Map<String, String> generateFakePaymentData() {
+        Map<String, String> paymentData = new HashMap<>();
+
+        paymentData.put("name_on_card", faker.name().fullName());
+        paymentData.put("card_number", faker.finance().creditCard().replaceAll("-", ""));
+        paymentData.put("cvc", String.valueOf(faker.number().numberBetween(100, 999)));
+        paymentData.put("expiry_month", String.format("%02d", faker.number().numberBetween(1, 12)));
+        paymentData.put("expiry_year", String.valueOf(faker.number().numberBetween(2025, 2030)));
+
+        return paymentData;
+    }
+
 }

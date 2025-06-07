@@ -1,5 +1,6 @@
 package pages;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -40,5 +41,10 @@ public class RegistrationPage {
     public String getErrorMessageText() {
     	TestUtil.waitForElementVisible(driver, errormessage, 10);
     	return errormessage.getText();
+    }
+    
+    public String getsignUpUserNameValidationMessage() {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        return (String) js.executeScript("return arguments[0].validationMessage;",signUpUserName);
     }
 }

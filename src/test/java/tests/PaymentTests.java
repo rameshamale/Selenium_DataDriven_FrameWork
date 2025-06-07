@@ -1,19 +1,22 @@
 package tests;
 
+import java.util.Map;
+
 import org.testng.annotations.*;
 import base.BaseTest;
+import pages.PaymentPage;
+import utils.TestUtil;
 
 public class PaymentTests extends BaseTest {
 
+	PaymentPage paymentPage;
     @Test(groups = "payment")
     public void testPaymentWithValidCard() {
-        System.out.println("testPaymentWithValidCard executed.");
+        
     }
-
 
     @Test(groups = "payment")
     public void testPaymentWithInvalidCard() {
-        System.out.println("testPaymentWithInvalidCard executed.");
     }
 
 }
