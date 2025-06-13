@@ -13,25 +13,43 @@ public class ExtentReportManager {
 
     private static ExtentReports extent;
     private static ThreadLocal<ExtentTest> test = new ThreadLocal<>();
-    private static Map<String, ExtentTest> testMap = new HashMap<>();
+    private static Map<String, ExtentTest> classTestMap = new HashMap<>();
 
     public static void setupReport() {
-    	String timestamp = new SimpleDateFormat("dd-MMM-yyyy_HH-mm-ssa").format(new Date()); 
+        String timestamp = new SimpleDateFormat("dd-MMM-yyyy_HH-mm-ssa").format(new Date());
         String reportPath = System.getProperty("user.dir") + "/reports/ExtentReport_" + timestamp + ".html";
 
         ExtentSparkReporter spark = new ExtentSparkReporter(reportPath);
         spark.config().setReportName("Automation Test Report");
         spark.config().setDocumentTitle("Test Report");
 
-        extent = new ExtentReports();  // ✅ assign to static variable
+        extent = new ExtentReports();
         extent.attachReporter(spark);
         extent.setSystemInfo("Tester", "Ramesh");
     }
 
-    public static void createTest(String testName) {
-        ExtentTest extentTest = extent.createTest(testName);
-        test.set(extentTest);
-        testMap.put(testName, extentTest);
+    // Get or create parent test for the class
+    public static ExtentTest getClassTest(String className) {
+        ExtentTest classTest = classTestMap.get(className);
+        if (classTest == null) {
+            classTest = extent.createTest(className);
+            classTestMap.put(className, classTest);
+        }
+        return classTest;
+    }
+
+    // Create a test node for the method with categories
+    public static void createTestNode(String className, String methodName, String[] groups) {
+        ExtentTest classTest = getClassTest(className);
+        ExtentTest methodNode = classTest.createNode(methodName);
+
+        if (groups != null) {
+            for (String group : groups) {
+                methodNode.assignCategory(group);
+            }
+        }
+
+        test.set(methodNode);
     }
 
     public static ExtentTest getTest() {

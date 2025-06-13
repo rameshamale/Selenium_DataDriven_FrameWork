@@ -18,7 +18,11 @@ public class TestListener implements ITestListener {
 
     @Override
     public void onTestStart(ITestResult result) {
-        ExtentReportManager.createTest(result.getMethod().getMethodName());
+        String className = result.getTestClass().getName();
+        String methodName = result.getMethod().getMethodName();
+        String[] groups = result.getMethod().getGroups();
+
+        ExtentReportManager.createTestNode(className, methodName, groups);
         ExtentReportManager.getTest().info("Test Started");
     }
 

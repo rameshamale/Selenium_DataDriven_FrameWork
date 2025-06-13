@@ -24,7 +24,7 @@ public class LoginTests extends BaseTest {
         return ExcelReader.readExcelData("InValidLogin"); 
     }
 	
-	@Test(dataProvider = "ValidLogin", groups = {"Login"},priority=1,description="Login with valid details")
+	@Test(dataProvider = "ValidLogin", groups = {"Login","smoke"},description="Login with valid details")
     public void testLoginWithValidCredentials(String Username, String Password) {
     	homePage=new HomePage(driver);
     	homePage.clickOnSignUpLoginButton();
@@ -33,7 +33,7 @@ public class LoginTests extends BaseTest {
     	homePage.verifyTheLoginPerson();
     	homePage.clickOnLogout();
     }
-    @Test(dataProvider = "InValidLogin",groups={"Login"},
+    @Test(dataProvider = "InValidLogin",groups={"Login","smoke"},
     	    description = "Login test with Invalid credentials")
     public void testLoginWithInvalidPassword(String Username, String Password) {
     	homePage=new HomePage(driver);
@@ -44,7 +44,7 @@ public class LoginTests extends BaseTest {
     	AssertJUnit.assertEquals(loginPage.getEmptyEmailErroeMessage(), expectedMessage);
     }
 
-    @Test( description = "Verify the logo is displayed")
+    @Test(groups={"Login","smoke"}, description = "Verify the logo is displayed")
     public void verifyLogoIsDisplayed() {
     	homePage=new HomePage(driver);
     	homePage.clickOnSignUpLoginButton();
@@ -54,7 +54,7 @@ public class LoginTests extends BaseTest {
     }
     
 
-    @Test(groups={"Login"},
+    @Test(groups={"Login","smoke"},
     	    description = "Verify the menu links are displayed")
     public void allTheMenuLinksAreDisplayed() {
     	homePage=new HomePage(driver);

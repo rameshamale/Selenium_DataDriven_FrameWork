@@ -3,35 +3,16 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="tests.ProductSearchTests">
+      <class name="tests.LogOutTest">
         <methods>
+          <include name="Logout"/>
           <include name="setUp"/>
           <include name="tearDown"/>
-          <include name="AddPerticularProductInCart"/>
+          <include name="login"/>
           <include name="setupExtentReport"/>
           <include name="tearDownExtentReport"/>
         </methods>
-      </class> <!-- tests.ProductSearchTests -->
-      <class name="tests.HomeTest">
-        <methods>
-          <include name="setUp"/>
-          <include name="tearDown"/>
-          <include name="LogOut"/>
-          <include name="verifyCategoryHeadingIsPresent"/>
-          <include name="setupExtentReport"/>
-          <include name="tearDownExtentReport"/>
-          <include name="verifyBrandsHeadingIsPresent"/>
-        </methods>
-      </class> <!-- tests.HomeTest -->
-      <class name="tests.LoginTests">
-        <methods>
-          <include name="testLoginWithValidCredentials" invocation-numbers="0"/>
-          <include name="setUp"/>
-          <include name="tearDown"/>
-          <include name="setupExtentReport"/>
-          <include name="tearDownExtentReport"/>
-        </methods>
-      </class> <!-- tests.LoginTests -->
+      </class> <!-- tests.LogOutTest -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

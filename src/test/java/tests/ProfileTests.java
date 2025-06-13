@@ -13,7 +13,7 @@ public class ProfileTests extends BaseTest {
 
     @Test(groups = "profile")
     public void testChangePassword() {
-        System.out.println("testChangePassword executed.");
+        System.out.println("Profile test case updated");
     }
 
 }
